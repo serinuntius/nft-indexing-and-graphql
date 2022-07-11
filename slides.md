@@ -316,3 +316,9 @@ layout: center
 - [EIP1155](https://eips.ethereum.org/EIPS/eip-1155)
 - [OpenZeppelin - IERC721.sol](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol)
 - [OpenZeppelin - IERC1155.sol](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol)
+
+---
+layout: center
+---
+
+# ご静聴ありがとうございました🙌 
