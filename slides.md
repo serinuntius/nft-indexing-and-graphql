@@ -17,6 +17,10 @@ fonts:
 
 Presentation by @_serinuntius
 
+<div class="absolute bottom-8 right-16">
+    2022.07.12, TOKYO BLOCKCHAIN TECH MEETUP 2022
+</div>
+
 ---
 
 # 今日話すこと
