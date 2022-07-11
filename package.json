@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "slidev --open",
         "build": "slidev build",
-        "export": "slidev export",
+        "export": "slidev export --dark --with-clicks && open slides-export.pdf",
         "pub": "slidev build --base /<repo name>/ && cp ./404.html ./dist/404.html && node ./modIndex.js && gh-pages -d dist"
     },
     "dependencies": {
@@ -12,7 +12,7 @@
         "@slidev/theme-seriph": "*",
         "gh-pages": "^3.2.0",
         "node-html-parser": "^3.3.4",
-        "playwright-chromium": "^1.19.0"
+        "playwright-chromium": "^1.23.2"
     },
     "name": "slidev-gh-page-template"
 }

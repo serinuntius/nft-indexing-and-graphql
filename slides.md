@@ -3,324 +3,316 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
+background: /bg.jpeg
 # apply any windi css classes to the current slide
 class: 'text-center'
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
-# some information about the slides, markdown enabled
-info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
 
-  Learn more at [Sli.dev](https://sli.dev)
+fonts:
+    sans: "HiraMaruProN-W4"
 ---
 
-# Welcome to Slidev
+# NFTのインデクシングとGraphQLのすゝめ
 
-Presentation slides for developers
-
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 p-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
-
-<a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
-  class="abs-br m-6 text-xl icon-btn opacity-50 !border-none !hover:text-white">
-  <carbon-logo-github />
-</a>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
+Presentation by @_serinuntius
 
 ---
 
-# What is Slidev?
-
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  -moz-text-fill-color: transparent;
-}
-</style>
+# 今日話すこと
+- 自己紹介
+- NFTのインデクシングとは？
+- なぜインデクシングが必要なのか？
+- インデクシングの実装
+- GraphQLのすゝめ
+- まとめ
 
 ---
 
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-### Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
----
-
-# Code
-
-Use code snippets and get the highlighting directly!
-
-<!-- https://sli.dev/guide/syntax.html#line-highlighting -->
-
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
-}
-
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = {...user, ...update}  
-  saveUser(id, newUser)
-}
-```
-
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
----
-
-# Components
-
+# 自己紹介
 <div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-preload: false
----
-
-# Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
+  <div>
+  
+  - 芹川葵: [@_serinuntius](https://twitter.com/_serinuntius)
+  - no plan inc. CTO
+  - JPYC 技術顧問
+  - 趣味:
+    - キャンプ
+    - スノボ
+  
   </div>
-
-  <div 
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
+  <div class="">
+    <img class="m-4 h-40" src="/serinuntius.jpeg" alt="serinuntiusのプロフィール画像">
+    <img class="m-4 h-30" src="/noplan_logo_horizontal.png" alt="no plan inc. のプロフィール画像">
+    <img class="m-4 p-2 h-20 bg-white" src="/JPYC.png" alt="JPYCのプロフィール画像">
   </div>
 </div>
 
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
+---
+
+# 興味ある技術とか、最近やってる技術とか（雑）
+
+<div class="grid grid-cols-5 gap-8 bg-gray-400 p-8">
+    <img src="/fav/rust.png">
+    <img src="/fav/cloud_run.jpeg">
+    <img src="/fav/firebase.png">
+    <img src="/fav/graphql.png">
+    <img src="/fav/react.png">
+    <img src="/fav/hardhat.jpeg">
+    <img src="/fav/intel_sgx.webp">
+    <img src="/fav/nestjs.png">
+    <img src="/fav/nextjs.png">
+    <img src="/fav/secret_network.png">
+    <img src="/fav/solidjs.png">
+    <img src="/fav/tauri.svg">
+    <img src="/fav/vercel.png">
+    <img src="/fav/circom.png">
+    <img src="/fav/cosmwasm.webp">
+</div>
+
+---
+
+# NFTのインデクシングとは？
+<div grid="~ cols-2 gap-4">
+  <div>
+    <ul>
+        <li>NFTが持つ情報や付随する情報を、検索し易いようにDBに格納すること</li>
+    </ul>
+  </div>
+  <div>
+    <table class="table_border">
+        <thead>
+            <tr>
+                <th>tokenId</th>
+                <th>address</th>
+                <th>metadata</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>0xabc</td>
+                <td>{"image": "ipfs://..."}</td>
+            </tr>
+            <tr>    
+                <td>2</td>
+                <td>0x123</td>
+                <td>{"image": "ipfs://..."}</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>0x456</td>
+                <td>{"image": "ipfs://..."}</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>0x789</td>
+                <td>{"image": "ipfs://..."}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+
+--- 
+
+# なぜインデクシングが必要なのか？
+
+- 一般的にNFTの情報にアクセスするには、コントラクトに生えてるview関数を叩く
+
+
+```solidity {0|1-5|7-12|all}
+function ownerOf(uint256 tokenId) public view virtual override returns (address) {
+    address owner = _owners[tokenId];
+    require(owner != address(0), "ERC721: invalid token ID");
+    return owner;
 }
-</script>
 
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
+function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+    _requireMinted(tokenId);
 
-[Learn More](https://sli.dev/guide/animations.html#motion)
+    string memory baseURI = _baseURI();
+    return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString())) : "";
+}
+```
 
-</div>
+<v-clicks>
+
+- 情報が欲しくなった時にview関数を叩きまくるのは色々と現実的ではない
+  - ノードの負担増🆙, Infura, Alchemy等のノードプロバイダーのコスト増🆙
+  - 時間もかかる
+- ERC1155対応の闇😈
+
+</v-clicks>
+
 
 ---
 
-# LaTeX
+# ERC1155対応の闇😈
 
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
+<v-clicks>
 
-<br>
+- ERC721みたいな `ownerOf(tokenId)` が生えてないので、 `tokenId` の所有者情報をview関数だけでは調べることができない😇
+- `name()` が生えてないのも地味にだるい
+  - ノードの情報だけでは何のコントラクトなのかわからない
+  - ERC721は規格としてマストにはなってないものの、OpenZeppelinの `ERC721Metadata` が普及しているため、大体取れる気がする
 
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
+</v-clicks>
 
 ---
+layout: center
+--- 
 
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-2 gap-4 pt-4 -mb-6">
-
-```mermaid {scale: 0.9}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
+# どうやってインデクシングするのか？
 
 
 ---
 layout: center
-class: text-center
+--- 
+
+# 闇の魔術😈に対する防衛術をお教えします👍
+
 ---
 
-# Learn More
+# インデクシングの実装
 
-[Documentations](https://sli.dev) / [GitHub Repo](https://github.com/slidevjs/slidev)
+<v-clicks>
+
+- EVMには **「event」** という概念がある
+- ノードに対してイベントをリッスンしておくことで、コントラクトからイベントが発火した時に何かを実行できる
+- ex) ERC721
+
+</v-clicks>
+
+
+<div v-after>
+
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+```
+
+</div>
+
+
+<v-clicks>
+
+- `indexed` というキーワードをつけると、その変数は検索できるようになる
+- `eth_getLogs` というAPIを呼び出すことによってイベントを取得できる
+  
+- どのブロック高でそのイベントが発生したかがわかる
+
+</v-clicks>
+
+
+---
+
+# インデクシングの実装 - ERC721
+
+<v-clicks>
+
+- 1ブロック目から、 
+
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+```
+
+</v-clicks>
+
+<v-clicks>
+
+- これを順に追って行けば良い
+- 最後に同期したブロック高をdbに入れて、次回以降は差分更新で良い
+
+</v-clicks>
+
+---
+
+
+# インデクシングの実装 - ERC1155
+
+<v-click>
+
+- ERC1155の場合はイベントが２種類ある
+
+</v-click>
+
+
+<v-click>
+
+```solidity {0|1|3-9|all}
+event TransferSingle(address indexed operator, address indexed from, address indexed to, uint256 id, uint256 value);
+
+event TransferBatch(
+    address indexed operator,
+    address indexed from,
+    address indexed to,
+    uint256[] ids,
+    uint256[] values
+);
+```
+
+</v-click>
+
+
+
+<v-clicks>
+
+- これらを順に追って行けば良い
+
+</v-clicks>
+
+---
+
+# GraphQLのすゝめ (時間なかった)
+- 先程行ったインデクシングでDBに保管してGraphQLで返すように実装してみました
+- 型付のクライアントが自動生成できるのでオススメ🔥
+- Nestjs / PlanetScale / Prisma / Cloud Run 辺りで実装しています
+
+---
+layout: center
+---
+
+# この辺りを全部気をつけて<br>実装するの面倒では？🤔🤔🤔
+
+
+---
+layout: center
+---
+
+# その通り！
+
+---
+layout: center
+---
+
+# 面倒ごとを全部うちが引き受けて<br>インデクシングするSaaS始めます！
+
+---
+
+# NFT GraphQL API (仮)
+
+<v-clicks>
+
+- ⛓ 任意のEVM互換のチェーンに対応できる（サポートして欲しいチェーンがあればお気軽に連絡ください）
+- 💰 実装コストやら、ノードのメンテコストやら考えると圧倒的コスパ
+- ¥ ボラの高い草コインじゃなくて、日本円で払えます（円も実質草コイ・・・🤫
+- 🚀 もう少しでリリースするのでちぇけら
+
+</v-clicks>
+
+
+---
+layout: center
+---
+
+# 興味ある方はこちら
+
+<img class="m-4 h-64" src="/form_qr.svg" alt="serinuntiusのプロフィール画像">
+
+---
+
+# 参考文献
+- [EIP721](https://eips.ethereum.org/EIPS/eip-721)
+- [EIP1155](https://eips.ethereum.org/EIPS/eip-1155)
+- [OpenZeppelin - IERC721.sol](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol)
+- [OpenZeppelin - IERC1155.sol](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol)
